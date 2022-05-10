@@ -32,6 +32,15 @@ public class LRUCacheThirdImplementation {
         Node node = new Node();
         node.key = key;
         node.value = value;
+        
+        if(map.containsKey(key)) {
+            Node existingNode = map.get(key);
+            
+            list.remove(existingNode);
+            map.put(key, node);
+            list.add(node);
+            return;
+        }
 
         if(map.size() >= capacity) {
             map.remove(list.getFirst().key);
